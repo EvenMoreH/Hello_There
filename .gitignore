@@ -1,10 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # C extensions
 *.so
+
+# Tailwind CSS generated files
+app/static/css/output.css
 
 # Distribution / packaging
 .Python
@@ -205,3 +208,7 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# fastHTML docs
+fastHTML_doc.txt
+.sesskey
