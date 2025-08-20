@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Tailwind CSS generated files
-app/static/css/output.css
+# app/static/css/output.css
 
 # Distribution / packaging
 .Python
