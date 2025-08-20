@@ -308,7 +308,7 @@ def color_converter():
 
 def main():
     """Main entry point for the application"""
-    serve(host='0.0.0.0', port=5071)
+    serve(host='0.0.0.0', port=5050)
 
 if __name__ == "__main__":
     main()

@@ -30,7 +30,7 @@ poetry install
 poetry run python app/app.py
 ```
 
-3. Open your browser and visit: http://localhost:5071
+3. Open your browser and visit: http://localhost:5050
 
 4. Compile Tailwind CSS (in development):
 ```bash
@@ -50,7 +50,7 @@ tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css --minif
 docker build -t hello-there-app .
 
 # Run the container
-docker run -p 5071:5071 hello-there-app
+docker run -p 5050:5050 hello-there-app
 ```
 
 ## Interactive Features
@@ -145,7 +145,7 @@ This app is ready for deployment on any platform that supports Docker:
 
 ### Environment Variables
 
-No environment variables are required for basic operation. The app runs on port 5071 by default.
+No environment variables are required for basic operation. The app runs on port 5050 by default.
 
 ## License
 
