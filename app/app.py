@@ -4,6 +4,8 @@ app, rt = fast_app(
     hdrs=[
         Script(src="https://unpkg.com/htmx.org"),
         Link(rel="stylesheet", href="/css/output.css"),
+        Link(rel="icon", href="/images/favicon.ico", type="image/x-icon"),
+        Link(rel="icon", href="/images/favicon.png", type="image/png"),
         Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
         Title("Hello There - FastHTML App")
     ],
