@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   github-runner:
@@ -9,11 +9,11 @@ services:
     container_name: hello-there-runner
     restart: unless-stopped
     environment:
-      - REPO_URL=${REPO_URL}
-      - GITHUB_RUNNER_TOKEN=${GITHUB_RUNNER_TOKEN}
-      - RUNNER_NAME=${RUNNER_NAME:-hello-there-runner}
-      - RUNNER_LABELS=${RUNNER_LABELS:-self-hosted,linux,docker}
-      - RUNNER_WORK=/runner/_work
+      REPO_URL: ${REPO_URL}
+      GITHUB_RUNNER_TOKEN: ${GITHUB_RUNNER_TOKEN}
+      RUNNER_NAME: ${RUNNER_NAME:-hello-there-runner}
+      RUNNER_LABELS: ${RUNNER_LABELS:-self-hosted,linux,docker}
+      RUNNER_WORK: /runner/_work
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - runner_work:/runner/_work
@@ -21,7 +21,11 @@ services:
     networks:
       - runner-network
     healthcheck:
-      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      test:
+        - CMD
+        - pgrep
+        - -f
+        - Runner.Worker
       interval: 30s
       timeout: 10s
       retries: 3
