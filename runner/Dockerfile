@@ -2,15 +2,18 @@ FROM ubuntu:22.04
 
 ARG RUNNER_VERSION=2.328.0
 
-# Install required packages, docker CLI and docker compose plugin
+# Install required packages and dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      curl ca-certificates jq git sudo libicu70 libssl3 libkrb5-3 unzip ca-certificates gnupg2 lsb-release && \
+      curl ca-certificates jq git sudo libicu70 libssl3 libkrb5-3 unzip \
+      gnupg2 lsb-release apt-transport-https software-properties-common && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Docker CLI (from distro) and Docker Compose plugin (compose v2)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends docker.io docker-compose-plugin && \
+# Install Docker CLI and Docker Compose plugin from Docker's official repository
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends docker-ce-cli docker-compose-plugin && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /actions-runner
