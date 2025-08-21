@@ -1,14 +1,10 @@
 version: "3.8"
 services:
   gha-runner:
-    # Use the image you will build from this repo (see steps). If Portainer builds it, it will be available locally.
     image: local-actions-runner:latest
     restart: unless-stopped
     environment:
-      # Set these in Portainer when you deploy the stack:
-      # REPO_URL: full repo URL to register to, e.g. https://github.com/EvenMoreH/your-app
       REPO_URL: "${REPO_URL}"
-      # RUNNER_TOKEN must be set at deploy-time as GITHUB_RUNNER_TOKEN in Portainer (substituted below)
       RUNNER_TOKEN: "${GITHUB_RUNNER_TOKEN}"
       RUNNER_NAME: "home-runner"
       RUNNER_LABELS: "self-hosted,home,docker"
