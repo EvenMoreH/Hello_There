@@ -1,0 +1,23 @@
+name: Build and deploy on self-hosted runner
+on:
+  push:
+    branches: [ main ]   # change to your deploy branch
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, home, docker]   # must match runner labels
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: |
+          IMAGE_NAME="hub2.0"
+          TAG="${{ github.sha }}"
+          docker build -t "${IMAGE_NAME}:${TAG}" .
+          docker tag "${IMAGE_NAME}:${TAG}" "${IMAGE_NAME}:latest"
+
+      - name: Deploy with docker compose
+        run: |
+          docker compose build --no-cache
+          docker compose up -d

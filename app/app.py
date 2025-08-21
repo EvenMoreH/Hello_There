@@ -7,7 +7,7 @@ app, rt = fast_app(
         Link(rel="icon", href="/images/favicon.ico", type="image/x-icon"),
         Link(rel="icon", href="/images/favicon.png", type="image/png"),
         Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
-        Title("Hello There - FastHTML App")
+        Title("Fastools Hub")
     ],
     pico=False,  # disable Pico CSS since we're using Tailwind
     static_path="static"  # serve static files from app/static
