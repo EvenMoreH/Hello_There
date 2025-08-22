@@ -124,7 +124,7 @@ def get():
                                 ),
                                 href="/alarm",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
 
@@ -138,7 +138,7 @@ def get():
                                 ),
                                 href="/temperature",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
 
@@ -152,7 +152,7 @@ def get():
                                 ),
                                 href="/qr-gen",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
 
@@ -166,7 +166,7 @@ def get():
                                 ),
                                 href="/distance_converter",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
 
@@ -180,7 +180,7 @@ def get():
                                 ),
                                 href="/dice_roller",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
 
@@ -194,7 +194,7 @@ def get():
                                 ),
                                 href="/color_converter",
                                 target="_blank",
-                                cls="card hover:scale-105 transform transition-transform duration-200 block"
+                                cls="app-card-link"
                             )
                         ),
                         cls="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
