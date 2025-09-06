@@ -10,7 +10,7 @@ app, rt = fast_app(
         Title("Fastools Hub")
     ],
     pico=False,  # disable Pico CSS since we're using Tailwind
-    static_path="static"  # serve static files depending on environment
+    static_path="app/static"  # serve static files
 )
 
 @rt("/")
