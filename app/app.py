@@ -1,9 +1,5 @@
 from fasthtml.common import * # type: ignore
 
-# check if dev or docker environment and assign static path based on that
-is_dev = os.path.exists("app/static")
-stat_path = "app/static" if is_dev else "static"
-
 app, rt = fast_app(
     hdrs=[
         Script(src="https://unpkg.com/htmx.org"),
@@ -14,7 +10,7 @@ app, rt = fast_app(
         Title("Fastools Hub")
     ],
     pico=False,  # disable Pico CSS since we're using Tailwind
-    static_path=stat_path  # serve static files depending on environment
+    static_path="static"  # serve static files depending on environment
 )
 
 @rt("/")
