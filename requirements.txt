@@ -1,2 +1,2 @@
-python-fasthtml>=0.6.9
-uvicorn>=0.23.0
+python-fasthtml==0.12.29
+uvicorn==0.23.0

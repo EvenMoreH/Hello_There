@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hello-there"
-version = "0.1.0"
+version = "0.2.0"
 description = "Portfolio Page"
 authors = ["EvenMoreDMG"]
 license = "MIT"
@@ -9,7 +9,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-python-fasthtml = "^0.6.9"
+python-fasthtml = "0.12.29"
 sqlite-minutils = "^4.0.3"
 
 [tool.poetry.group.dev.dependencies]

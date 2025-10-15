@@ -212,3 +212,4 @@ __marimo__/
 # fastHTML docs
 fastHTML_doc.txt
 .sesskey
+.vscode
