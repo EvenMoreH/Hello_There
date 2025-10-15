@@ -8,7 +8,7 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.14"
 python-fasthtml = "0.12.29"
 sqlite-minutils = "^4.0.3"
 
@@ -30,6 +30,6 @@ line-length = 88
 target-version = ['py312']
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.14"
 warn_return_any = true
 warn_unused_configs = true
