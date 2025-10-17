@@ -323,10 +323,10 @@ def games():
     <html>
     <head>
         <meta charset="utf-8">
-        <title>Comming Soon!</title>
+        <title>Coming Soon!</title>
     </head>
     <body>
-        Comming Soon!
+        Coming Soon!
     </body>
     </html>"""
 
@@ -337,10 +337,10 @@ def games():
     <html>
     <head>
         <meta charset="utf-8">
-        <title>Comming Soon!</title>
+        <title>Coming Soon!</title>
     </head>
     <body>
-        Comming Soon!
+        Coming Soon!
     </body>
     </html>"""
 
