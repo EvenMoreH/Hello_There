@@ -91,6 +91,22 @@
     @apply grid grid-cols-1 md:grid-cols-3 gap-6;
   }
 
+  .two-col-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+
+  .app-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .btn-spacing {
+    @apply mt-8;
+  }
+
+  .iframe-container {
+    @apply w-full h-64 border rounded;
+  }
+
   /* Button Components */
   .btn {
     @apply bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg
@@ -143,6 +159,10 @@
     }
 
     .card {
+      @apply bg-gray-800 border border-gray-700 shadow-gray-700;
+    }
+
+    .app-card-link {
       @apply bg-gray-800 border border-gray-700 shadow-gray-700;
     }
 
