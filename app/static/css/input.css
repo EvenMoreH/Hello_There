@@ -83,7 +83,8 @@
   }
   /* App link card for other apps section */
   .app-card-link {
-    @apply card hover:scale-105 transform transition-transform duration-200 block;
+    @apply bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300
+           hover:scale-105 transition-transform duration-200 block;
   }
 
   .feature-grid {

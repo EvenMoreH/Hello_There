@@ -16,7 +16,9 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app/ .
+COPY app/ /app/
+# Copy static files to the correct location
+COPY app/static/ /app/static/
 
 # Create non-root user
 RUN adduser --disabled-password --gecos '' appuser \
