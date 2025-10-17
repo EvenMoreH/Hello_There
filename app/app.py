@@ -32,7 +32,7 @@ def get():
         ),
         Main(
             Div(
-                # feature cards
+                # features section - tech stack
                 Div(
                     H2("Features", cls="section-title"),
                     Div(
@@ -40,10 +40,9 @@ def get():
                         Div(
                             Div(
                                 H3("⚡ FastHTML", cls="card-title"),
-                                P(
-                                    "Built with FastHTML - the modern Python web framework that " \
-                                    "combines the best of server-side rendering with reactive components.",
-                                  cls="card-text")
+                                P("Built with FastHTML - the modern Python web framework that " \
+                                "combines the best of server-side rendering with reactive components.",
+                                    cls="card-text")
                             ),
                             cls="card"
                         ),
@@ -53,7 +52,7 @@ def get():
                             Div(
                                 H3("🎨 Tailwind CSS", cls="card-title"),
                                 P("Styled with Tailwind CSS for beautiful, responsive design with utility-first CSS classes.",
-                                  cls="card-text")
+                                    cls="card-text")
                             ),
                             cls="card"
                         ),
@@ -63,7 +62,7 @@ def get():
                             Div(
                                 H3("🐳 Docker Ready", cls="card-title"),
                                 P("Containerized and ready for deployment anywhere with Docker support.",
-                                  cls="card-text")
+                                    cls="card-text")
                             ),
                             cls="card"
                         ),
@@ -72,7 +71,6 @@ def get():
                     ),
                     cls="section-spacing"
                 ),
-
                 # HTMX Interactive section
                 Div(
                     H2("Try It Out", cls="section-title"),
@@ -99,7 +97,7 @@ def get():
                             hx_get="/demo/iframe",
                             hx_target="#demo-iframe",
                             hx_swap="outerHTML",
-                            cls="btn mt-8"
+                            cls="btn btn-spacing"
                         ),
                         Div(
                             "Click the button above to load API response into iframe!",
@@ -107,6 +105,43 @@ def get():
                             cls="demo-result"
                         ),
                         cls="centered"
+                    ),
+                    cls="section-spacing"
+                ),
+                 # projects section
+                Div(
+                    H2("More From Me", cls="section-title"),
+                    Div(
+                        # card 4
+                        Div(
+                            A(
+                                Div(
+                                    H3("← My Games (Coming Soon)", cls="card-title"),
+                                    P(
+                                        "Web game projects in development. Stay tuned for updates!",
+                                    cls="card-text")
+                                ),
+                                href="/games",
+                                target="_blank",
+                            ),
+                            cls="app-card-link"
+                        ),
+
+                        # card 5
+                        Div(
+                            A(
+                                Div(
+                                    H3("Check Out How I Test Things →", cls="card-title"),
+                                    P("Explore my testing methodologies, automation frameworks, and quality assurance practices.",
+                                        cls="card-text")
+                                ),
+                                href="/testing",
+                                target="_blank",
+                            ),
+                            cls="app-card-link"
+                        ),
+
+                        cls="two-col-grid"
                     ),
                     cls="section-spacing"
                 ),
@@ -197,7 +232,7 @@ def get():
                                 cls="app-card-link"
                             )
                         ),
-                        cls="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        cls="app-grid"
                     ),
                     cls="section-spacing"
                 ),
@@ -255,7 +290,7 @@ def get():
     return Div(
         Iframe(
             src="/api/hello",
-            cls="w-full h-64 border rounded"
+            cls="iframe-container"
         ),
         # reset after 10 seconds
         Div(
@@ -280,6 +315,35 @@ def get():
 @rt("/api/hello")
 def get():
     return {"message": "Hello from FastHTML API!", "status": "200 OK"}
+
+# more from me endpoints
+@rt("/games")
+def games():
+    return """<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Comming Soon!</title>
+    </head>
+    <body>
+        Comming Soon!
+    </body>
+    </html>"""
+
+
+@rt("/testing")
+def games():
+    return """<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Comming Soon!</title>
+    </head>
+    <body>
+        Comming Soon!
+    </body>
+    </html>"""
+
 
 # app endpoints
 @rt("/alarm")

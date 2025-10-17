@@ -1,8 +1,8 @@
-# Use Python 3.12 slim image
+# Use Python 3.14 slim image
 FROM python:3.14-slim
 
 # Set working directory
-WORKDIR /app
+WORKDIR /code
 
 # Install system dependencies
 RUN apt-get update \
@@ -16,22 +16,16 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app/ /app/
-# Copy static files to the correct location
-COPY app/static/ /app/static/
+COPY app ./app
 
 # Create non-root user
 RUN adduser --disabled-password --gecos '' appuser \
-    && chown -R appuser:appuser /app
+    && chown -R appuser:appuser /code
 USER appuser
 
 # Expose port
 EXPOSE 5050
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:5050/api/hello')" || exit 1
-
 # Run the application
 ENTRYPOINT ["python"]
-CMD ["app.py"]
+CMD ["app/app.py"]
