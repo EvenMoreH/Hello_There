@@ -6,8 +6,7 @@ app, rt = fast_app(
         Link(rel="stylesheet", href="/css/output.css"),
         Link(rel="icon", href="/images/favicon.ico", type="image/x-icon"),
         Link(rel="icon", href="/images/favicon.png", type="image/png"),
-        Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
-        Title("Fastools Hub")
+        Meta(name="viewport", content="width=device-width, initial-scale=1.0")
     ],
     pico=False,  # disable Pico CSS since we're using Tailwind
     static_path="app/static"  # serve static files
@@ -15,7 +14,8 @@ app, rt = fast_app(
 
 @rt("/")
 def get():
-    return Div(
+    return Title("Fastools Hub"), \
+    Div(
         Header(
             Div(
                 H1("Hello There! 👋", cls="hero-title"),
@@ -34,7 +34,7 @@ def get():
             Div(
                 # features section - tech stack
                 Div(
-                    H2("Features", cls="section-title"),
+                    H2("Technologies Used", cls="section-title"),
                     Div(
                         # card 1
                         Div(

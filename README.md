@@ -1,16 +1,17 @@
 # Hello There - FastHTML Portfolio App
 
-A personal portfolio web application built with FastHTML and Tailwind CSS, showcasing interactive demos and links to utility applications. The app features HTMX demonstrations, iframe integration, and a responsive design.
+A personal portfolio web application built with FastHTML and Tailwind CSS v4.1, showcasing interactive demos and links to utility applications. The app features HTMX demonstrations, iframe integration, and a fully responsive design with custom component-based styling.
 
 ## Features
 
 - 🚀 **FastHTML**: Modern Python web framework with server-side rendering and reactive components
-- 🎨 **Tailwind CSS**: Utility-first CSS framework for beautiful, responsive design
+- 🎨 **Tailwind CSS v4.1**: Custom component-based styling with utility classes
 - ⚡ **HTMX Integration**: Interactive demos showcasing dynamic content updates
 - 🖼️ **iframe Demos**: API response integration within embedded frames
 - 🐳 **Docker Ready**: Containerized for easy deployment
-- 📱 **Responsive Design**: Mobile-first approach with dark/light mode support
+- 📱 **Responsive Design**: Mobile-first approach with automatic dark/light mode support
 - 🔗 **App Showcase**: Links to external utility applications
+- 🎮 **Coming Soon**: Game projects and testing methodologies showcase
 
 ## Live Demo
 
@@ -74,6 +75,17 @@ The app showcases links to various utility applications:
 - 🎲 **Dice Roller**: https://roll.fastools.xyz
 - 🎨 **Color Converter**: https://color.fastools.xyz
 
+## Page Sections
+
+The main page includes the following sections:
+
+1. **Hero Header**: Introduction with gradient background
+2. **Technologies Used**: Showcases FastHTML, Tailwind CSS v4.1, and Docker
+3. **More From Me**: Links to upcoming game projects and testing methodologies
+4. **Try It Out**: Interactive HTMX and iframe demonstrations
+5. **Check out my other apps**: Links to 6 utility applications
+6. **Footer**: Credits and social links
+
 ## Project Structure
 
 ```
@@ -82,7 +94,7 @@ Hello_There/
 │   ├── app.py          # Main FastHTML application
 │   └── static/
 │       ├── css/
-│       │   ├── input.css    # Tailwind source styles
+│       │   ├── input.css    # Tailwind v4.1 source with custom components
 │       │   └── output.css   # Compiled Tailwind CSS
 │       └── images/
 │           ├── favicon.ico
@@ -98,12 +110,19 @@ Hello_There/
 
 ## API Endpoints
 
-- `GET /` - Main application page
+### Main Routes
+- `GET /` - Main application page with title "Fastools Hub"
+- `GET /games` - Coming soon page for game projects
+- `GET /testing` - Coming soon page for testing methodologies
+
+### Demo Endpoints
 - `GET /demo/htmx` - HTMX demonstration endpoint
 - `GET /demo/htmx/reset` - Reset HTMX demo
 - `GET /demo/iframe` - iframe demonstration endpoint
 - `GET /demo/iframe/reset` - Reset iframe demo
 - `GET /api/hello` - Sample API endpoint returning JSON
+
+### External App Redirects
 - `GET /alarm` - Redirect to alarm app
 - `GET /temperature` - Redirect to temperature converter
 - `GET /qr-gen` - Redirect to QR generator
@@ -114,11 +133,19 @@ Hello_There/
 ## Technologies Used
 
 - **FastHTML**: Modern Python web framework with reactive components
-- **Tailwind CSS**: Utility-first CSS framework (compiled locally)
+- **Tailwind CSS v4.1**: Utility-first CSS framework with custom component classes
 - **HTMX**: Interactive frontend without JavaScript frameworks
 - **Docker**: Containerization with health checks
-- **Python 3.12**: Runtime environment
+- **Python 3.12+**: Runtime environment
 - **Poetry**: Dependency management and packaging
+
+### CSS Architecture
+
+The app uses Tailwind CSS v4.1 with a custom component-based architecture:
+- All inline utilities replaced with reusable component classes
+- Custom classes for layout, typography, cards, buttons, and more
+- Full dark/light mode support with media queries
+- Responsive design with mobile-first approach
 
 ## Development
 
