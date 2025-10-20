@@ -1,4 +1,6 @@
 from fasthtml.common import * # type: ignore
+from pages.games_page import games_page
+from pages.testing_page import testing_page
 
 app, rt = fast_app(
     hdrs=[
@@ -316,33 +318,15 @@ def get():
 def get():
     return {"message": "Hello from FastHTML API!", "status": "200 OK"}
 
-# more from me endpoints
+# more "from me" endpoints
 @rt("/games")
 def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+    return games_page()
 
 
 @rt("/testing")
-def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+def testing():
+    return testing_page()
 
 
 # app endpoints
