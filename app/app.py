@@ -1,12 +1,22 @@
 import sys
 from pathlib import Path
-from fasthtml.common import * # type: ignore
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
+from fasthtml.common import * # type: ignore
+
 from app.applications import load_applications
+from app.content.homepage import (
+    HERO_TITLE,
+    HERO_PARAGRAPH,
+    MORE_GAMES_TEXT,
+    MORE_TESTING_TEXT,
+    TECH_DOCKER_TEXT,
+    TECH_FASTHTML_TEXT,
+    TECH_TAILWIND_TEXT,
+)
 
 app, rt = fast_app(
     hdrs=[
@@ -52,14 +62,8 @@ def get():
     Div(
         Header(
             Div(
-                H1("Hello There! 👋", cls="hero-title"),
-                P(
-                    "I work in quality assurance and have a passion for software development. \
-                    Outside of work, I enjoy building tools to boost productivity, \
-                    exploring new technologies, \
-                    and trying to learn something new every day.",
-                  cls="hero-subtitle"
-                  ),
+                H1(HERO_TITLE, cls="hero-title"),
+                P(HERO_PARAGRAPH, cls="hero-subtitle"),
                 cls="hero-content"
             ),
             cls="hero-header"
@@ -74,9 +78,7 @@ def get():
                         Div(
                             Div(
                                 H3("⚡ FastHTML", cls="card-title"),
-                                P("Built with FastHTML - the modern Python web framework that " \
-                                "combines the best of server-side rendering with reactive components.",
-                                    cls="card-text")
+                                P(TECH_FASTHTML_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -85,8 +87,7 @@ def get():
                         Div(
                             Div(
                                 H3("🎨 Tailwind CSS", cls="card-title"),
-                                P("Styled with Tailwind CSS for beautiful, responsive design with utility-first CSS classes.",
-                                    cls="card-text")
+                                P(TECH_TAILWIND_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -95,8 +96,7 @@ def get():
                         Div(
                             Div(
                                 H3("🐳 Docker Ready", cls="card-title"),
-                                P("Containerized and ready for deployment anywhere with Docker support.",
-                                    cls="card-text")
+                                P(TECH_DOCKER_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -151,9 +151,7 @@ def get():
                             A(
                                 Div(
                                     H3("← My Games (Coming Soon)", cls="card-title"),
-                                    P(
-                                        "Web game projects in development. Stay tuned for updates!",
-                                    cls="card-text")
+                                    P(MORE_GAMES_TEXT, cls="card-text"),
                                 ),
                                 href="/games",
                                 target="_blank",
@@ -166,8 +164,7 @@ def get():
                             A(
                                 Div(
                                     H3("Check Out How I Test Things →", cls="card-title"),
-                                    P("Explore my testing methodologies, automation frameworks, and quality assurance practices.",
-                                        cls="card-text")
+                                    P(MORE_TESTING_TEXT, cls="card-text"),
                                 ),
                                 href="/testing",
                                 target="_blank",
@@ -179,6 +176,7 @@ def get():
                     ),
                     cls="section-spacing"
                 ),
+                # adding all app cards from applications folder
                 apps_section,
                 cls="container-section"
             ),
