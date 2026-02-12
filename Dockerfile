@@ -14,7 +14,8 @@ RUN apt-get update \
 # Install uv for fast Python dependency installs
 ENV UV_LINK_MODE=copy
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin:${PATH}"
+# uv installs to ~/.local/bin by default; ensure it's on PATH
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Copy requirements and install Python dependencies via uv
 COPY requirements.txt .
