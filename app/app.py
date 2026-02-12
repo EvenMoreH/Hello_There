@@ -18,6 +18,10 @@ from app.content.homepage import (
     TECH_TAILWIND_TEXT,
 )
 
+# page modules (moved out of this file to slim it down)
+from app.pages.games import games_page
+from app.pages.testing import testing_page
+
 app, rt = fast_app(
     hdrs=[
         Script(src="https://unpkg.com/htmx.org"),
@@ -261,30 +265,12 @@ def get():
 # more from me endpoints
 @rt("/games")
 def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+    return games_page()
 
 
 @rt("/testing")
-def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+def testing():
+    return testing_page()
 
 
 def main():
