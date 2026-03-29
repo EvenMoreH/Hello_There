@@ -23,6 +23,8 @@ from app.content.homepage import (
 from app.pages.games import games_page
 from app.pages.testing import testing_page
 
+EXTERNAL_LINK_REL = "noopener noreferrer"
+
 app, rt = fast_app(
     hdrs=[
         Script(src="https://unpkg.com/htmx.org"),
@@ -43,12 +45,17 @@ def get():
         Div(
             A(
                 Div(
-                    H3(f"{application.icon} {application.title}", cls="card-title"),
+                    H3(
+                        f"{application.icon} {application.title}"
+                        if application.icon
+                        else application.title,
+                        cls="card-title",
+                    ),
                     P(application.description, cls="card-text")
                 ),
                 href=application.href,
                 target=application.target,
-                rel="noopener noreferrer",
+                rel=EXTERNAL_LINK_REL,
                 cls="app-card-link"
             )
         )
@@ -83,7 +90,7 @@ def get():
                         # card 1
                         Div(
                             Div(
-                                H3("⚡ FastHTML", cls="card-title"),
+                                H3("FastHTML", cls="card-title"),
                                 P(TECH_FASTHTML_TEXT, cls="card-text"),
                             ),
                             cls="card"
@@ -92,7 +99,7 @@ def get():
                         # card 2
                         Div(
                             Div(
-                                H3("🎨 Tailwind CSS", cls="card-title"),
+                                H3("Tailwind CSS", cls="card-title"),
                                 P(TECH_TAILWIND_TEXT, cls="card-text"),
                             ),
                             cls="card"
@@ -101,7 +108,7 @@ def get():
                         # card 3
                         Div(
                             Div(
-                                H3("🐳 Docker Ready", cls="card-title"),
+                                H3("Docker Ready", cls="card-title"),
                                 P(TECH_DOCKER_TEXT, cls="card-text"),
                             ),
                             cls="card"
@@ -161,7 +168,7 @@ def get():
                                 ),
                                 href="/games",
                                 target="_blank",
-                                rel="noopener noreferrer",
+                                rel=EXTERNAL_LINK_REL,
                             ),
                             cls="app-card-link"
                         ),
@@ -175,7 +182,7 @@ def get():
                                 ),
                                 href="/testing",
                                 target="_blank",
-                                rel="noopener noreferrer",
+                                rel=EXTERNAL_LINK_REL,
                             ),
                             cls="app-card-link"
                         ),
@@ -194,14 +201,14 @@ def get():
         # footer
         Footer(
             Div(
-                P("Built with ❤️ using FastHTML and Tailwind CSS", cls="footer-text"),
+                P("Built with FastHTML and Tailwind CSS", cls="footer-text"),
                 Div(
                     P(
                         "Created by ",
                         A("EvenMoreH",
                           href="https://github.com/EvenMoreH",
                           target="_blank",
-                          rel="noopener noreferrer",
+                          rel=EXTERNAL_LINK_REL,
                           cls="footer-link"),
                         cls="footer-text-small"
                     ),
@@ -218,7 +225,7 @@ def get():
 @rt("/demo/htmx")
 def get():
     return Div(
-        P("🎉 Great! FastHTML and Tailwind are working perfectly together! Resetting in 5...",
+        P("Great! FastHTML and Tailwind are working perfectly together! Resetting in 5...",
           cls="success-text"),
           # reset after 5 seconds
           Div(

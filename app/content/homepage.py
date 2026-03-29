@@ -4,7 +4,7 @@ Centralizes long texts so app/app.py can stay focused
 on layout and components.
 """
 
-HERO_TITLE = "Hello There! 👋"
+HERO_TITLE = "Hello There!"
 
 HERO_PARAGRAPH = (
     "I work in quality assurance and have a passion for software development. "

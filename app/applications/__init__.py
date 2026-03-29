@@ -66,8 +66,7 @@ def load_applications(rt: Callable) -> List[Application]:
             continue
 
         candidate = getattr(module, "application", None)
-        if isinstance(candidate, Application):
-            if candidate.bind(rt):
-                applications.append(candidate)
+        if isinstance(candidate, Application) and candidate.bind(rt):
+            applications.append(candidate)
     applications.sort(key=lambda app: app.title.lower())
     return applications
