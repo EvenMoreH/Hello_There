@@ -7,13 +7,19 @@ WORKDIR /code
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        curl \
         gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+# Install uv for fast Python dependency installs
+ENV UV_LINK_MODE=copy
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+# uv installs to ~/.local/bin by default; ensure it's on PATH
+ENV PATH="/code/.venv/bin:/root/.local/bin:${PATH}"
+
+# Copy lockfile metadata and install Python dependencies via uv
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy application code
 COPY app ./app
@@ -27,5 +33,4 @@ USER appuser
 EXPOSE 5050
 
 # Run the application
-ENTRYPOINT ["python"]
-CMD ["app/app.py"]
+CMD ["python", "-m", "app.app"]

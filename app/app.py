@@ -1,4 +1,27 @@
+import sys
+from pathlib import Path
+
+if __package__ in (None, ""):
+    ROOT_DIR = Path(__file__).resolve().parent.parent
+    if str(ROOT_DIR) not in sys.path:
+        sys.path.insert(0, str(ROOT_DIR))
+
 from fasthtml.common import * # type: ignore
+
+from app.applications import load_applications
+from app.content.homepage import (
+    HERO_TITLE,
+    HERO_PARAGRAPH,
+    MORE_GAMES_TEXT,
+    MORE_TESTING_TEXT,
+    TECH_DOCKER_TEXT,
+    TECH_FASTHTML_TEXT,
+    TECH_TAILWIND_TEXT,
+)
+
+# page modules (moved out of this file to slim it down)
+from app.pages.games import games_page
+from app.pages.testing import testing_page
 
 app, rt = fast_app(
     hdrs=[
@@ -12,20 +35,41 @@ app, rt = fast_app(
     static_path="app/static"  # serve static files
 )
 
+applications = load_applications(rt)
+
 @rt("/")
 def get():
+    app_cards = [
+        Div(
+            A(
+                Div(
+                    H3(f"{application.icon} {application.title}", cls="card-title"),
+                    P(application.description, cls="card-text")
+                ),
+                href=application.href,
+                target=application.target,
+                rel="noopener noreferrer",
+                cls="app-card-link"
+            )
+        )
+        for application in applications
+    ]
+
+    apps_section = Div(
+        H2("Check out my other apps", cls="section-title"),
+        Div(
+            *(app_cards if app_cards else [P("No applications available yet.", cls="card-text")]),
+            cls="app-grid"
+        ),
+        cls="section-spacing"
+    )
+
     return Title("Fastools Hub"), \
     Div(
         Header(
             Div(
-                H1("Hello There! 👋", cls="hero-title"),
-                P(
-                    "I work in quality assurance and have a passion for software development. \
-                    Outside of work, I enjoy building tools to boost productivity, \
-                    exploring new technologies, \
-                    and trying to learn something new every day.",
-                  cls="hero-subtitle"
-                  ),
+                H1(HERO_TITLE, cls="hero-title"),
+                P(HERO_PARAGRAPH, cls="hero-subtitle"),
                 cls="hero-content"
             ),
             cls="hero-header"
@@ -40,9 +84,7 @@ def get():
                         Div(
                             Div(
                                 H3("⚡ FastHTML", cls="card-title"),
-                                P("Built with FastHTML - the modern Python web framework that " \
-                                "combines the best of server-side rendering with reactive components.",
-                                    cls="card-text")
+                                P(TECH_FASTHTML_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -51,8 +93,7 @@ def get():
                         Div(
                             Div(
                                 H3("🎨 Tailwind CSS", cls="card-title"),
-                                P("Styled with Tailwind CSS for beautiful, responsive design with utility-first CSS classes.",
-                                    cls="card-text")
+                                P(TECH_TAILWIND_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -61,8 +102,7 @@ def get():
                         Div(
                             Div(
                                 H3("🐳 Docker Ready", cls="card-title"),
-                                P("Containerized and ready for deployment anywhere with Docker support.",
-                                    cls="card-text")
+                                P(TECH_DOCKER_TEXT, cls="card-text"),
                             ),
                             cls="card"
                         ),
@@ -117,12 +157,11 @@ def get():
                             A(
                                 Div(
                                     H3("← My Games (Coming Soon)", cls="card-title"),
-                                    P(
-                                        "Web game projects in development. Stay tuned for updates!",
-                                    cls="card-text")
+                                    P(MORE_GAMES_TEXT, cls="card-text"),
                                 ),
                                 href="/games",
                                 target="_blank",
+                                rel="noopener noreferrer",
                             ),
                             cls="app-card-link"
                         ),
@@ -132,11 +171,11 @@ def get():
                             A(
                                 Div(
                                     H3("Check Out How I Test Things →", cls="card-title"),
-                                    P("Explore my testing methodologies, automation frameworks, and quality assurance practices.",
-                                        cls="card-text")
+                                    P(MORE_TESTING_TEXT, cls="card-text"),
                                 ),
                                 href="/testing",
                                 target="_blank",
+                                rel="noopener noreferrer",
                             ),
                             cls="app-card-link"
                         ),
@@ -145,97 +184,8 @@ def get():
                     ),
                     cls="section-spacing"
                 ),
-                # apps section
-                Div(
-                    H2("Check out my other apps", cls="section-title"),
-                    Div(
-                        # alarm app
-                        Div(
-                            A(
-                                Div(
-                                    H3("⏰ Alarm Clock", cls="card-title"),
-                                    P("Set alarms and manage your time with this simple alarm clock application.",
-                                      cls="card-text")
-                                ),
-                                href="/alarm",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-
-                        # temperature converter
-                        Div(
-                            A(
-                                Div(
-                                    H3("🌡️ Temperature Converter", cls="card-title"),
-                                    P("Convert temperatures between Celsius, Fahrenheit, and Kelvin with ease.",
-                                      cls="card-text")
-                                ),
-                                href="/temperature",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-
-                        # qr generator
-                        Div(
-                            A(
-                                Div(
-                                    H3("📱 QR Code Generator", cls="card-title"),
-                                    P("Generate QR codes for text, URLs, and other data quickly and easily.",
-                                      cls="card-text")
-                                ),
-                                href="/qr-gen",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-
-                        # distance converter
-                        Div(
-                            A(
-                                Div(
-                                    H3("📏 Distance Converter", cls="card-title"),
-                                    P("Convert between different units of distance in your TTRPGs.",
-                                      cls="card-text")
-                                ),
-                                href="/distance_converter",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-
-                        # dice roller
-                        Div(
-                            A(
-                                Div(
-                                    H3("🎲 Dice Roller", cls="card-title"),
-                                    P("Roll virtual dice for games, decisions, or random number generation in old-school way",
-                                      cls="card-text")
-                                ),
-                                href="/dice_roller",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-
-                        # color converter
-                        Div(
-                            A(
-                                Div(
-                                    H3("🎨 Color Converter", cls="card-title"),
-                                    P("Convert colors between different formats: HEX, RGB, Tailwind.",
-                                      cls="card-text")
-                                ),
-                                href="/color_converter",
-                                target="_blank",
-                                cls="app-card-link"
-                            )
-                        ),
-                        cls="app-grid"
-                    ),
-                    cls="section-spacing"
-                ),
+                # adding all app cards from applications folder
+                apps_section,
                 cls="container-section"
             ),
             cls="main-content"
@@ -319,56 +269,13 @@ def get():
 # more from me endpoints
 @rt("/games")
 def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+    return games_page()
 
 
 @rt("/testing")
-def games():
-    return """<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Coming Soon!</title>
-    </head>
-    <body>
-        Coming Soon!
-    </body>
-    </html>"""
+def testing():
+    return testing_page()
 
-
-# app endpoints
-@rt("/alarm")
-def alarm():
-    return Redirect("https://alarm.fastools.xyz")
-
-@rt("/temperature")
-def temperature():
-    return Redirect("https://temperature.fastools.xyz")
-
-@rt("/qr-gen")
-def qr_generator():
-    return Redirect("https://qr.fastools.xyz")
-
-@rt("/distance_converter")
-def distance_converter():
-    return Redirect("https://distance.fastools.xyz")
-
-@rt("/dice_roller")
-def dice_roller():
-    return Redirect("https://roll.fastools.xyz")
-
-@rt("/color_converter")
-def color_converter():
-    return Redirect("https://color.fastools.xyz/")
 
 def main():
     """Main entry point for the application"""
