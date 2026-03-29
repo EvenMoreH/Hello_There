@@ -30,13 +30,13 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv venv .venv
 source .venv/bin/activate
 
-# Install project dependencies
-uv pip install -r requirements.txt
+# Install project dependencies from the lockfile
+uv sync --frozen --no-dev --no-install-project
 ```
 
 2. Run the application:
 ```bash
-python app/app.py
+python -m app.app
 ```
 
 3. Open your browser and visit: http://localhost:5050
@@ -109,6 +109,10 @@ Hello_There/
 │   │   ├── distance_converter.py # Distance converter registration
 │   │   ├── dice_roller.py        # Dice roller registration
 │   │   └── color_converter.py    # Color converter registration
+│   ├── pages/
+│   │   ├── __init__.py     # Package marker for page modules
+│   │   ├── games.py        # Games page content
+│   │   └── testing.py      # Testing page content
 │   └── static/
 │       ├── css/
 │       │   ├── input.css    # Tailwind v4.1 source with custom components
@@ -117,7 +121,8 @@ Hello_There/
 │           ├── favicon.ico
 │           └── favicon.png
 ├── pyproject.toml      # Project configuration and dependencies (uv/Poetry compatible)
-├── requirements.txt    # Python dependencies (used by uv and Docker)
+├── requirements.txt    # Compatibility dependency list for tools that still expect it
+├── uv.lock             # Locked dependency graph used by Docker/CI/local sync
 ├── tailwind.config.js  # Tailwind CSS configuration
 ├── Dockerfile          # Docker configuration
 ├── README.md           # This file
@@ -139,7 +144,7 @@ This project now uses a simple **registry pattern** for apps, so adding a new to
 - Each module in `app/applications/` (for example `alarm.py`, `temperature.py`, etc.) defines **one** `application = Application(...)` instance; no manual route wiring is needed in those files.
 
 **Runtime flow:**
-1. `python app/app.py` starts the FastHTML app and calls `load_applications(rt)`.
+1. `python -m app.app` starts the FastHTML app and calls `load_applications(rt)`.
 2. The loader imports every `app/applications/*.py` module (except names starting with `_`).
 3. Each `application` instance registers its route with `rt` (redirect or custom view).
 4. The homepage uses the returned list of applications to render the "Check out my other apps" grid.
@@ -181,6 +186,15 @@ For a more detailed, teaching-focused explanation (for juniors), see `registry_p
 - **Docker**: Containerization with health checks
 - **Python 3.12+**: Runtime environment
 - **uv**: Fast Python dependency management (used locally and in Docker)
+
+### Dependency Source Of Truth
+
+The authoritative dependency definition is `pyproject.toml` plus `uv.lock`.
+
+- Local development uses `uv sync --frozen`.
+- Docker builds use `uv sync --frozen`.
+- CI installs use `uv sync --frozen`.
+- `requirements.txt` is retained only for compatibility with tools that still expect it.
 
 ### CSS Architecture
 

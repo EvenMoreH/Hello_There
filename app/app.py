@@ -1,9 +1,10 @@
 import sys
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
+if __package__ in (None, ""):
+    ROOT_DIR = Path(__file__).resolve().parent.parent
+    if str(ROOT_DIR) not in sys.path:
+        sys.path.insert(0, str(ROOT_DIR))
 
 from fasthtml.common import * # type: ignore
 
@@ -47,6 +48,7 @@ def get():
                 ),
                 href=application.href,
                 target=application.target,
+                rel="noopener noreferrer",
                 cls="app-card-link"
             )
         )
@@ -159,6 +161,7 @@ def get():
                                 ),
                                 href="/games",
                                 target="_blank",
+                                rel="noopener noreferrer",
                             ),
                             cls="app-card-link"
                         ),
@@ -172,6 +175,7 @@ def get():
                                 ),
                                 href="/testing",
                                 target="_blank",
+                                rel="noopener noreferrer",
                             ),
                             cls="app-card-link"
                         ),
