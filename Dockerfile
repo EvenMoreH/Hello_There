@@ -13,21 +13,21 @@ RUN apt-get update \
 
 # Install uv for fast Python dependency installs
 ENV UV_LINK_MODE=copy
+ENV UV_INSTALL_DIR=/usr/local/bin
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-# uv installs to ~/.local/bin by default; ensure it's on PATH
-ENV PATH="/code/.venv/bin:/root/.local/bin:${PATH}"
+ENV PATH="/code/.venv/bin:${PATH}"
+
+# Create non-root user before copying project files so we can avoid a slow recursive chown.
+RUN adduser --disabled-password --gecos '' appuser \
+    && chown appuser:appuser /code
 
 # Copy lockfile metadata and install Python dependencies via uv
-COPY pyproject.toml uv.lock ./
+COPY --chown=appuser:appuser pyproject.toml uv.lock ./
+USER appuser
 RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy application code
-COPY app ./app
-
-# Create non-root user
-RUN adduser --disabled-password --gecos '' appuser \
-    && chown -R appuser:appuser /code
-USER appuser
+COPY --chown=appuser:appuser app ./app
 
 # Expose port
 EXPOSE 5050
