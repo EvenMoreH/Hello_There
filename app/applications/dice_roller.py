@@ -4,7 +4,7 @@ application = Application(
     slug="dice_roller",
     title="Dice Roller",
     description=(
-        "Roll virtual dice for games, decisions, or random number generation in old-school way"
+        "Roll virtual dice for games, decisions, or random number generation in an old-school way."
     ),
     icon="🎲",
     route="/dice_roller",
