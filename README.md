@@ -82,6 +82,7 @@ The app showcases links to various utility applications (registered via the app 
 - 📏 **Distance Converter**: https://distance.fastools.xyz
 - 🎲 **Dice Roller**: https://roll.fastools.xyz
 - 🎨 **Color Converter**: https://color.fastools.xyz
+- 🖼️ **ICO Converter**: https://ico.fastools.xyz
 
 ## Page Sections
 
@@ -91,7 +92,7 @@ The main page includes the following sections:
 2. **Technologies Used**: Showcases FastHTML, Tailwind CSS v4.1, and Docker
 3. **More From Me**: Links to upcoming game projects and testing methodologies
 4. **Try It Out**: Interactive HTMX and iframe demonstrations
-5. **Check out my other apps**: Links to 6 utility applications
+5. **Check out my other apps**: Links to 7 utility applications
 6. **Footer**: Credits and social links
 
 ## Project Structure
@@ -108,7 +109,8 @@ Hello_There/
 │   │   ├── qr_gen.py             # QR generator registration
 │   │   ├── distance_converter.py # Distance converter registration
 │   │   ├── dice_roller.py        # Dice roller registration
-│   │   └── color_converter.py    # Color converter registration
+│   │   ├── color_converter.py    # Color converter registration
+│   │   └── to_ico_converter.py   # ICO converter registration
 │   ├── pages/
 │   │   ├── __init__.py     # Package marker for page modules
 │   │   ├── games.py        # Games page content
